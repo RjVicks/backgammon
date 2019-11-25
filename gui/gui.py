@@ -1,29 +1,33 @@
-# import the pygame module, so you can use it
 import pygame
-
-# define a main function
-
-
-def load_board():
-    # load and set the image
-    board = pygame.image.load("board.png")
-    pygame.display.set_caption("Backgammon")
-
-    # create a surface
-    screen_width, screen_height = 980, 480
-    screen = pygame.display.set_mode((screen_width, screen_height))
-    screen.blit(board, (0, 0))
-    pygame.display.flip()
-    return board, screen
+import points_gui
 
 
-def get_point_coordx(index):
-    POINT_X_POSITIONS = [63, 131, 199, 265, 335, 405]
-    return POINT_X_POSITIONS[index]
+class Gui:
 
+    def __init__(self):
+        pygame.display.set_caption("Backgammon")
+        self.board_img = pygame.image.load("board.png")
 
-def get_point_coordy(height):
-    return 24 + (height * 48)
+        screen_width, screen_height = 980, 480
+        self.screen = pygame.display.set_mode((screen_width, screen_height))
+        self.screen.blit(self.board_img, (0, 0))
+        pygame.display.flip()
+        self.yellow_counter = pygame.image.load("yellow_counter.png")
+        self.purple_counter = pygame.image.load("purple_counter.png")
+        self.point_coords = points_gui.Points_Gui()
+        self.counter_rect = 0
+
+    def place(self, counter, position):
+        self.counter_rect = self.screen.blit(counter, self.point_coords.get_position(position))
+        pygame.display.update(self.counter_rect)
+
+    def remove(self, position_rect):
+        self.screen.blit(self.board_img, position_rect, position_rect)
+        pygame.display.update(position_rect)
+
+    def move(self, counter, initial, to):
+        self.remove(self.counter_rect)
+        self.place(counter, to)
 
 
 def main():
@@ -31,23 +35,18 @@ def main():
 
     # initialize the pygame module
     pygame.init()
-    board, screen = load_board()
-    counter = pygame.image.load("counter48.png")
+    gui = Gui()
+    player_turn = "yellow"
     # define a variable to control the main loop
-    running = True
 
     # add the counter to point 0
-    for i in range(5):
-        screen.blit(counter, (get_point_coordx(i), get_point_coordy(0))
-    screen.blit(counter, (528, get_point_coordy(0)))
-    screen.blit(counter, (596, get_point_coordy(0)))
-    screen.blit(counter, (664, get_point_coordy(0)))
-    screen.blit(counter, (732, get_point_coordy(0)))
-    screen.blit(counter, (800, get_point_coordy(0)))
-    screen.blit(counter, (868, get_point_coordy(0)))
 
-    pygame.display.flip()
+    gui.place(gui.yellow_counter, (1, 1))
+    pygame.time.delay(500)
+    gui.move(gui.yellow_counter, (1, 1), (2, 1))
+
     # main loop
+    running = True
     while running:
         # event handling, gets all event from the event queue
         for event in pygame.event.get():
@@ -55,7 +54,7 @@ def main():
             # only do something if the event is of type QUIT
             if event.type == pygame.QUIT:
                 # change the value to False, to exit the main loop
-                running=False
+                running = False
 
 
 # run the main function only if this module is executed as the main script
