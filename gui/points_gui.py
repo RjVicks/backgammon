@@ -5,7 +5,8 @@ class Points_Gui:
         self.bench = 24
         self.far_bench = 456
 
-    def get_position(self, index, height):
+    def get_position(self, position):
+        index, height = position[0] - 1, position[1]
         if index >= 12:
             x_pos = self.x_positions[23-index]
             y_pos = self.far_bench - (42 * height)

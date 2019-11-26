@@ -36,7 +36,6 @@ def main():
     # initialize the pygame module
     pygame.init()
     gui = Gui()
-    player_turn = "yellow"
     # define a variable to control the main loop
 
     # add the counter to point 0

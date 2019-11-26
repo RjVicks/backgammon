@@ -1,13 +1,5 @@
 import game_objects as obj
 
-# Start state
-board = obj.Board()
-white_player = obj.Player("White", board)
-black_player = obj.Player("Black", board)
-playing = True
-player_turn = "White"
-print("Welcome to Backgammon\n")
-
 
 def parse_input(input_string):
     positions = input_string.split(' ')
@@ -45,6 +37,14 @@ def switch_player_turn(player_turn):
     else:
         return "White"
 
+
+# Start state
+board = obj.Board()
+white_player = obj.Player("White", board)
+black_player = obj.Player("Black", board)
+playing = True
+player_turn = "White"
+print("Welcome to Backgammon\n")
 
 while playing:
     if player_turn == "White":

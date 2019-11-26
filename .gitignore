@@ -1,4 +1,5 @@
 __pycache__/*
 gui/__pycache__
+engine/__pycache__
 playground.py
 gui/*.png
