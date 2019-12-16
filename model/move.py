@@ -1,4 +1,4 @@
-def move(self, board, player_colour, start_point, end_point):
+def move(board, player_colour, start_point, end_point):
     is_free_move = board.is_point_empty(player_colour, end_point) or board.is_point_players(player_colour, end_point)
     if is_free_move:
         board.remove_checker(start_point)
@@ -17,7 +17,7 @@ def move(self, board, player_colour, start_point, end_point):
         return False
 
 
-def opposite_player(self, player_colour):
+def opposite_player(player_colour):
     if player_colour == "yellow":
         return "purple"
     elif player_colour == "purple":
