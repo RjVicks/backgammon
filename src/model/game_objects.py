@@ -35,19 +35,19 @@ class Board:
         self.purple_bar = 0
 
     def add_checker_to_bar(self, player_colour):
-        if player_colour == "yellow":
+        if player_colour == "y":
             self.yellow_bar += 1
-        elif player_colour == "purple":
+        elif player_colour == "p":
             self.purple_bar += 1
 
     def remove_checker_from_bar(self, player_colour):
-        if player_colour == "yellow":
+        if player_colour == "y":
             self.yellow_bar -= 1
-        elif player_colour == "purple":
+        elif player_colour == "p":
             self.purple_bar -= 1
 
     def add_checker(self, player_colour, index):
-        self.points[index].increment(player_colour, index)
+        self.points[index].increment(player_colour)
 
     def remove_checker(self, index):
         self.points[index].decrement()
@@ -76,7 +76,7 @@ class Board:
             col_3 = str(index+13) + "|  " + self.points[index+12].get_info() + "\t\t"
             col_4 = str(index+19) + "|  " + self.points[index+18].get_info()
             print(col_1 + col_2 + col_3 + col_4)
-        print("y bench: {} \t p bench: {}".format(self.y_bench, self.p_bench))
+        print("y bench: {} \t p bench: {}".format(self.yellow_bar, self.purple_bar))
         print("------- END --------\n")
 
 
