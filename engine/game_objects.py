@@ -10,12 +10,12 @@ class Point:
     def get_info(self):
         return '{}{}'.format(self.occupied_by, self.num_checkers)
 
-    def set_checkers(self, player, number):
+    def set_checkers(self, player_colour, number):
         self.num_checkers = number
-        self.occupied_by = player
+        self.occupied_by = player_colour
 
-    def increment(self, player):
-        self.occupied_by = player
+    def increment(self, player_colour):
+        self.occupied_by = player_colour
         self.num_checkers += 1
 
     def decrement(self):
@@ -31,48 +31,43 @@ class Board:
 
     def __init__(self):
         self.points = [Point("e", 0) for x in range(24)]
-        self.y_bench = 0
-        self.p_bench = 0
+        self.yellow_bar = 0
+        self.purple_bar = 0
 
-    def get_height(self, index):
-        index -= 1
+    def add_checker_to_bar(self, player_colour):
+        if player_colour == "yellow":
+            self.yellow_bar += 1
+        elif player_colour == "purple":
+            self.purple_bar += 1
+
+    def remove_checker_from_bar(self, player_colour):
+        if player_colour == "yellow":
+            self.yellow_bar -= 1
+        elif player_colour == "purple":
+            self.purple_bar -= 1
+
+    def add_checker(self, player_colour, index):
+        self.points[index].increment(player_colour, index)
+
+    def remove_checker(self, index):
+        self.points[index].decrement()
+
+    def is_point_players(self, player_colour, index):
+        return self.points[index].occupied_by == player_colour
+
+    def is_point_empty(self, index):
+        return self.points[index].occupied_by == "e"
+
+    def is_point_takeable(self, player_colour, index):
+        is_opponents = not self.is_point_players(player_colour, index)
+        is_isolated = self.get_num_checkers(index) == 1
+        return is_opponents and is_isolated
+
+    def get_num_checkers(self, index):
         return self.points[index].num_checkers
 
-    def set_point(self, player, index, number):
-        index -= 1
-        self.points[index].set_checkers(player, number)
-
-    def move(self, player_turn, start_point, end_point):
-        start_point -= 1
-        end_point -= 1
-        is_empty = self.points[end_point].occupied_by == "e"
-        is_players = self.points[end_point].occupied_by == player_turn
-        if is_empty or is_players:
-            self.points[start_point].decrement()
-            self.points[end_point].increment(player_turn)
-
-        if self.is_takeable(player_turn, end_point):
-            self.points[end_point].decrement()
-            if player_turn == "y":
-                self.p_bench += 1
-            elif player_turn == "p":
-                self.y_bench += 1
-            self.points[start_point].decrement()
-            self.points[end_point].increment(player_turn)
-
-    def is_takeable(self, player_turn, end_point):
-        is_occupied_by_opponent = self.opposite_player(player_turn) == self.points[end_point].occupied_by
-        is_isolated = self.points[end_point].num_checkers == 1
-        if is_occupied_by_opponent and is_isolated:
-            return True
-        else:
-            return False
-
-    def opposite_player(self, player_turn):
-        if player_turn == "y":
-            return "p"
-        if player_turn == "p":
-            return "y"
+    def set_point(self, player_colour, index, number):
+        self.points[index].set_checkers(player_colour, number)
 
     def show(self):
         for index in range(6):
