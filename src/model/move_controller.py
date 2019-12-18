@@ -20,11 +20,11 @@ def make_move(board, player_colour, start_point, end_point):
 
 def is_player_home(board, player_colour):
     sum = 0
-    if player_colour == "y":
+    if player_colour == "Yellow":
         for point_index in range(6):
             if board.is_point_players(player_colour, point_index):
                 sum += board.get_num_checkers(point_index)
-    elif player_colour == "p":
+    elif player_colour == "Purple":
         for point_index in range(18, 24):
             if board.is_point_players(player_colour, point_index):
                 sum += board.get_num_checkers(point_index)

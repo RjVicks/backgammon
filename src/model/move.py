@@ -41,7 +41,7 @@ def bear_off(board, point):
 
 
 def opposite_player(player_colour):
-    if player_colour == "y":
-        return "p"
-    elif player_colour == "p":
-        return "y"
+    if player_colour == "Yellow":
+        return "Purple"
+    elif player_colour == "Purple":
+        return "Yellow"

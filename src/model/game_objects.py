@@ -37,27 +37,27 @@ class Board:
         self.purple_home = 0
 
     def add_checker_to_home(self, player_colour):
-        if player_colour == "y":
+        if player_colour == "Yellow":
             self.yellow_home += 1
-        elif player_colour == "p":
+        elif player_colour == "Purple":
             self.purple_home += 1
 
     def is_player_on_bar(self, player_colour):
-        if player_colour == "y":
+        if player_colour == "Yellow":
             return self.yellow_bar >= 1
-        elif player_colour == "p":
+        elif player_colour == "Purple":
             return self.purple_bar >= 1
 
     def add_checker_to_bar(self, player_colour):
-        if player_colour == "y":
+        if player_colour == "Yellow":
             self.yellow_bar += 1
-        elif player_colour == "p":
+        elif player_colour == "Purple":
             self.purple_bar += 1
 
     def remove_checker_from_bar(self, player_colour):
-        if player_colour == "y":
+        if player_colour == "Yellow":
             self.yellow_bar -= 1
-        elif player_colour == "p":
+        elif player_colour == "Purple":
             self.purple_bar -= 1
 
     def add_checker(self, player_colour, index):

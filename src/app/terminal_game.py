@@ -15,17 +15,17 @@ def set_up_board(board, yellow_player, purple_player):
 
 
 def switch_active_player(active_player):
-    if active_player == "y":
-        return "p"
-    elif active_player == "p":
-        return "y"
+    if active_player == "Yellow":
+        return "Purple"
+    elif active_player == "Purple":
+        return "Yellow"
 
 
 game_incomplete = True
 board = go.Board()
 dice = go.Dice()
-yellow_player = "y"
-purple_player = "p"
+yellow_player = "Yellow"
+purple_player = "Purple"
 active_player = yellow_player
 
 set_up_board(board, yellow_player, purple_player)

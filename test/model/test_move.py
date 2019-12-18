@@ -6,8 +6,8 @@ import unittest
 class TestMove(unittest.TestCase):
 
     def setUp(self):
-        self.yellow_player = "y"
-        self.purple_player = "p"
+        self.yellow_player = "Yellow"
+        self.purple_player = "Purple"
         self.board = go.Board()
         self.points = [0, 1, 5]
         self.num_checkers = [1, 5]
