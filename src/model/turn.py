@@ -12,7 +12,7 @@ def make_turn(board, player_colour, dice):
 
     while turn_incomplete:
 
-        start_point, end_point = user_input.get_start_and_end_points()
+        start_point, end_point = user_input.get_start_and_end_points(player_colour)
         position_difference = abs(start_point - end_point)
 
         legal_move_difference = position_difference in dice.get_available_values()
@@ -21,9 +21,11 @@ def make_turn(board, player_colour, dice):
         if legal_move_difference and move_successful:
             dice.remove_from_available_values(position_difference)
             print("Move success")
+            board.show()
+            dice.show()
 
         else:
             print("please make a legal move")
 
-        turn_incomplete = dice.number_of_values_left() == 0
+        turn_incomplete = dice.number_of_values_left() > 0
     print("--End Turn --")
