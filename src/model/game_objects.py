@@ -97,11 +97,35 @@ class Board:
 class Dice:
 
     def __init__(self):
-        self.value = [0, 0]
+        self.values = [0, 0, 0, 0]
 
     def roll(self):
-        self.value[0] = random.randint(1, 6)
-        self.value[1] = random.randint(1, 6)
+        self.values[0] = random.randint(1, 6)
+        self.values[1] = random.randint(1, 6)
+        if self.values[0] == self.values[1]:
+            self.values[2] = self.values[0]
+            self.values[3] = self.values[0]
+
+    def get_available_values(self):
+        available_moves = []
+        for value in self.values:
+            if value != 0:
+                available_moves.append(value)
+        return available_moves
+
+    def remove_from_available_values(self, value):
+        for index, _value in enumerate(self.values):
+            if value == _value:
+                self.values[index] = 0
+                return
+
+    def number_of_values_left(self):
+        sum = 0
+        for value in self.values:
+            if value != 0:
+                sum += 1
+
+        return sum
 
     def show(self):
-        print("Dice: {} {}".format(self.value[0], self.value[1]))
+        print("Dice: {} {} {} {}".format(self.values[0], self.values[1], self.values[2], self.values[3]))
