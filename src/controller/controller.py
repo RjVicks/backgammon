@@ -3,12 +3,12 @@
 
 class Controller:
 
-    def handle_input(self):
+    def handle_input():
         input_string = input("Player please make a move: ")
         positions = input_string.split(' ')
         return int(positions[0]), int(positions[1])
 
-    def make_turn(self):
+    def make_turn():
         self.game.yellow_player.roll_dice()
         self.game.show()
 
