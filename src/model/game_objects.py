@@ -33,6 +33,20 @@ class Board:
         self.points = [Point("e", 0) for x in range(24)]
         self.yellow_bar = 0
         self.purple_bar = 0
+        self.yellow_home = 0
+        self.purple_home = 0
+
+    def add_checker_to_home(self, player_colour):
+        if player_colour == "y":
+            self.yellow_home += 1
+        elif player_colour == "p":
+            self.purple_home += 1
+
+    def is_player_on_bar(self, player_colour):
+        if player_colour == "y":
+            return self.yellow_bar >= 1
+        elif player_colour == "p":
+            return self.purple_bar >= 1
 
     def add_checker_to_bar(self, player_colour):
         if player_colour == "y":

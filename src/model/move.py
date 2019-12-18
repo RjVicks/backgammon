@@ -1,6 +1,3 @@
-# Responsible for move functionallity
-
-
 def move(board, player_colour, start_point, end_point):
     is_free_move = board.is_point_empty(end_point) or board.is_point_players(player_colour, end_point)
     if is_free_move:
@@ -39,7 +36,7 @@ def enter(board, player_colour, end_point):
         return False
 
 
-def bear_off(board, player_colour, point):
+def bear_off(board, point):
     board.remove_checker(point)
 
 
